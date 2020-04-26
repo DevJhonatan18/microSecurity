@@ -15,6 +15,8 @@ import com.example.demo_seguridad.dao.UsuarioDao;
 import com.example.demo_seguridad.models.entity.Role;
 import com.example.demo_seguridad.models.entity.Usuario;
 
+// import brave.Tracer;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +32,9 @@ public class UsuarioService implements UserDetailsService {
 	
 	@Autowired
 	private UsuarioDao usuarioDao;
+	
+	//@Autowired
+	//private Tracer tracer;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,6 +44,9 @@ public class UsuarioService implements UserDetailsService {
 		Usuario u = usuarioDao.findByUsername(username);
 		
 		 if (u == null) {
+			 
+			// tracer.currentSpan().tag("error_mesage","Error Login");
+			 
 	            throw new UsernameNotFoundException("Error login");
 	        }
 		
